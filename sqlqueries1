@@ -1,0 +1,1160 @@
+INSERT INTO customer VALUES ( 'C00013','holmes','London','London', 'UK','2',6000.00,5000.00,7000.00,4000.00,1236543,'A003'),('C00025','Ravindran','Banglore', 'Banglore','India',2,5000.00,7000.00,4000.00,8000.00,1234567,'A011');
+
+INSERT INTO orders VALUES ( '200114',3500,2000,'2015-08-08', 'C00013','A003');
+
+
+
+    SELECT a.ord_num,b.cust_name,a.cust_code,  
+    c.agent_code,b.cust_city  
+    FROM agents c,customer b,orders a  
+    WHERE b.cust_city=c.working_area  
+    AND a.cust_code=b.cust_code  
+    AND a.agent_code=c.agent_code;  
+
+   SELECT EMP_ID, NAME, DEPT FROM COMPANY INNER JOIN DEPARTMENT
+        ON COMPANY.ID = DEPARTMENT.EMP_ID
+   UNION
+     SELECT EMP_ID, NAME, DEPT FROM COMPANY LEFT OUTER JOIN DEPARTMENT
+        ON COMPANY.ID = DEPARTMENT.EMP_ID;
+
+
+
+ SELECT EMP_ID, NAME, DEPT FROM COMPANY INNER JOIN DEPARTMENT
+        ON COMPANY.ID = DEPARTMENT.EMP_ID
+   UNION ALL
+     SELECT EMP_ID, NAME, DEPT FROM COMPANY LEFT OUTER JOIN DEPARTMENT
+        ON COMPANY.ID = DEPARTMENT.EMP_ID;
+
+select c.id, c.name ,c.age,d.dept 
+ from Company as c, Department as d
+  where c.id=d.Emp_Id
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE Company(
+   Id INT PRIMARY KEY     NOT NULL,
+   Name           TEXT    NOT NULL,
+   Age            INT     NOT NULL,
+   Address        CHAR(50),
+   Salary        REAL
+);
+Query returned successfully with no result in 83 ms.
+
+-- Executing pgScript
+Total pgScript runtime: 321 ms.
+
+-- Executing query:
+INSERT INTO Company VALUES (1, 'Paul', 32, 'California', 20000.00 );
+
+INSERT INTO Company  VALUES (2, 'Allen', 25, 'Texas', '2007-12-13');
+
+insert into Company Values (3, 'Teddy', 23, 'Norway', 20000.00 );
+
+insert into Company Values (4, 'Mark', 25, 'Rich-Mond ', 65000.00 ), (5, 'David', 27, 'Texas', 85000.00 );
+
+SELECT * FROM Company;
+
+SELECT Id, Name from  Company;
+
+ Select * from company where age >=25 or salary >=15000;
+
+SELECT * FROM COMPANY
+        WHERE AGE >(SELECT AGE FROM COMPANY WHERE SALARY > 65000);
+
+SELECT * FROM Company WHERE Age  between  25 And 32 ;
+
+SELECT * FROM Company WHERE Age in (25,32) ;
+
+SELECT * FROM COMPANY WHERE Name  like  'P%'
+
+SELECT * FROM COMPANY WHERE AGE IS NOT NULL;
+SELECT * from Company where Age >25 And Salary >50000
+
+
+
+
+
+ 
+update Company set salary =45000 where id='3';
+
+update Company set Address ='Texas' where salary=20000;
+
+
+
+
+-- Executing pgScript
+Total pgScript runtime: 278 ms.
+
+-- Executing query:
+select * from Company:
+ERROR:  syntax error at or near ":"
+LINE 1: select * from Company:
+                             ^
+
+
+
+-- Executing query:
+select * from Company;
+Total query runtime: 1 ms.
+4 rows retrieved.
+
+-- Executing query:
+select * from Company order by id;
+Total query runtime: 12 ms.
+4 rows retrieved.
+
+-- Executing query:
+INSERT INTO Company  VALUES (2, 'Allen', 25, 'Texas', '2007-12-13');
+ERROR:  invalid input syntax for type real: "2007-12-13"
+LINE 1: ...RT INTO Company  VALUES (2, 'Allen', 25, 'Texas', '2007-12-1...
+                                                             ^
+
+
+
+-- Executing query:
+INSERT INTO Company  VALUES (2, 'Allen', 25, 'Texas', 45000.00);
+Query returned successfully: one row affected, 22 ms execution time.
+
+-- Executing pgScript
+Total pgScript runtime: 84 ms.
+
+-- Executing pgScript
+Total pgScript runtime: 66 ms.
+
+-- Executing query:
+
+INSERT INTO COMPANY VALUES (8, 'Paul', 24, 'Houston', 20000.00);
+INSERT INTO COMPANY VALUES (9, 'James', 44, 'Norway', 5000.00);
+INSERT INTO COMPANY VALUES (10, 'James', 45, 'Texas', 5000.00);
+select * from Company;
+ERROR:  duplicate key value violates unique constraint "company_pkey"
+DETAIL:  Key (id)=(8) already exists.
+
+
+-- Executing query:
+
+
+select * from Company;
+Total query runtime: 12 ms.
+8 rows retrieved.
+
+-- Executing query:
+
+
+select * from Company order by id;
+Total query runtime: 13 ms.
+8 rows retrieved.
+
+-- Executing query:
+
+
+SELECT NAME FROM COMPANY GROUP BY name HAVING count(name) < 2;
+Total query runtime: 3 ms.
+4 rows retrieved.
+
+-- Executing query:
+
+
+SELECT NAME FROM COMPANY GROUP BY name HAVING count(name) > 1;
+Total query runtime: 3 ms.
+2 rows retrieved.
+
+-- Executing query:
+
+SELECT DISTINCT name FROM COMPANY;
+Total query runtime: 13 ms.
+6 rows retrieved.
+
+-- Executing query:
+
+CREATE TABLE COMPANY5(
+   ID INT PRIMARY KEY     NOT NULL,
+   NAME           TEXT    NOT NULL,
+   AGE            INT     NOT NULL,
+   ADDRESS        CHAR(50),
+   SALARY         REAL    CHECK(SALARY > 0)
+);
+
+
+Query returned successfully with no result in 112 ms.
+
+-- Executing query:
+drop table company5;
+Query returned successfully with no result in 23 ms.
+
+-- Executing query:
+CREATE TABLE COMPANY6(
+   Id INT PRIMARY KEY     NOT NULL,
+   Name           TEXT    NOT NULL,
+   Age           INT     NOT NULL,
+   Address        CHAR(50),
+   Salary        REAL
+);
+Query returned successfully with no result in 112 ms.
+
+-- Executing query:
+CREATE TABLE DEPARTMENT1(
+   Id INT PRIMARY KEY      NOT NULL,
+   Dept           CHAR(50) NOT NULL,
+   Emp_Id         INT      references COMPANY6(ID)
+);`
+
+
+-- Executing query:
+CREATE TABLE DEPARTMENT1(
+   Id INT PRIMARY KEY      NOT NULL,
+   Dept           CHAR(50) NOT NULL,
+   Emp_Id         INT      references COMPANY6(ID)
+);
+Query returned successfully with no result in 82 ms.
+
+-- Executing query:
+CREATE TABLE Company5(
+   Id INT PRIMARY KEY      NOT NULL,
+   Name           Text NOT NULL,
+   Age         INT     NOT NULL,
+   Address char(50),
+   Salary REAL Check(Salary>0)
+);
+Query returned successfully with no result in 92 ms.
+
+-- Executing query:
+INSERT INTO DEPARTMENT (ID, DEPT, EMP_ID)
+VALUES (1, 'IT Billing', 1 );
+
+INSERT INTO DEPARTMENT (ID, DEPT, EMP_ID)
+VALUES (2, 'Engineering', 2 );
+
+INSERT INTO DEPARTMENT (ID, DEPT, EMP_ID)
+VALUES (3, 'Finance', 7 );
+Query returned successfully: one row affected, 23 ms execution time.
+
+-- Executing query:
+SELECT EMP_ID, NAME, DEPT FROM COMPANY CROSS JOIN DEPARTMENT;
+Total query runtime: 13 ms.
+24 rows retrieved.
+
+-- Executing query:
+SELECT EMP_ID, NAME, DEPT FROM COMPANY CROSS JOIN DEPARTMENT;
+select * from department;
+query result with 24 rows discarded.
+
+
+
+Total query runtime: 14 ms.
+3 rows retrieved.
+
+-- Executing query:
+
+select * from department;
+
+Total query runtime: 13 ms.
+3 rows retrieved.
+
+-- Executing query:
+
+select * from department;
+
+Total query runtime: 13 ms.
+3 rows retrieved.
+
+-- Executing query:
+
+select * from department;
+
+Total query runtime: 11 ms.
+3 rows retrieved.
+
+-- Executing query:
+
+select * from department;
+
+Total query runtime: 12 ms.
+3 rows retrieved.
+
+-- Executing query:
+
+select Emp_id,Name, Dept from Company left outer join Department 
+on Company.Id= Dpartment.emp_id;
+
+
+
+-- Executing query:
+
+select Emp_id,Name, Dept from Company left outer join Department 
+on Company.Id= Department.emp_id;
+
+Total query runtime: 13 ms.
+8 rows retrieved.
+
+-- Executing query:
+
+create Table agents ( AGENT_CODE VARCHAR (25),AGENT_NAME(TEXT) , WORKING_AREA(TEXT), COMMISSION REAL, PHONE_NO INT(25), COUNTRY VARCHAR(25)); 
+
+ERROR:  syntax error at or near "("
+LINE 2: ... Table agents ( AGENT_CODE VARCHAR (25),AGENT_NAME(TEXT) , W...
+                                                             ^
+
+
+-- Executing query:
+
+create Table agents ( AGENT_CODE VARCHAR (25),AGENT_NAME TEXT , WORKING_AREA(TEXT), COMMISSION REAL, PHONE_NO INT(25), COUNTRY VARCHAR(25)); 
+
+ERROR:  syntax error at or near "("
+LINE 2: ...T_CODE VARCHAR (25),AGENT_NAME TEXT , WORKING_AREA(TEXT), CO...
+                                                             ^
+
+
+-- Executing query:
+
+create Table agents ( AGENT_CODE VARCHAR (25),AGENT_NAME TEXT , WORKING_AREA TEXT , COMMISSION REAL, PHONE_NO INT(25), COUNTRY VARCHAR(25)); 
+
+ERROR:  syntax error at or near "("
+LINE 2: ... WORKING_AREA TEXT , COMMISSION REAL, PHONE_NO INT(25), COUN...
+                                                             ^
+
+
+
+-- Executing query:
+
+create Table agents ( AGENT_CODE VARCHAR (25),AGENT_NAME TEXT , WORKING_AREA TEXT , COMMISSION REAL, PHONE_NO INT (25), COUNTRY VARCHAR(25)); 
+
+ERROR:  syntax error at or near "("
+LINE 2: ...WORKING_AREA TEXT , COMMISSION REAL, PHONE_NO INT (25), COUN...
+                                                             ^
+
+
+
+-- Executing query:
+
+create Table agents ( AGENT_CODE VARCHAR (25) PRIMARY KEY,AGENT_NAME TEXT , WORKING_AREA TEXT , COMMISSION REAL, PHONE_NO INT , COUNTRY VARCHAR(25)); 
+
+Query returned successfully with no result in 104 ms.
+
+-- Executing pgScript
+Total pgScript runtime: 25 ms.
+
+-- Executing query:
+
+create Table customer ( CUST_CODE VARCHAR (25) PRIMARY KEY,CUST_NAME TEXT ,CUST_CITY TEXT, WORKING_AREA TEXT , CUST_COUNTRY TEXT , GRADE  INT, OPENING_AMG REAL,RECEIVE_AMT REAL,PAYMENT_AMT REAL, OUTSTANDING_AMT REAL, PHONE_NO INT , AGENT_CODE VARCHAR(25) REFERENCES agents; 
+
+ERROR:  syntax error at or near ";"
+LINE 2: ...L, PHONE_NO INT , AGENT_CODE VARCHAR(25) REFERENCES agents; 
+                                                                     ^
+
+
+
+-- Executing query:
+
+create Table customer ( CUST_CODE VARCHAR (25) PRIMARY KEY,CUST_NAME TEXT ,CUST_CITY TEXT, WORKING_AREA TEXT , CUST_COUNTRY TEXT , GRADE  INT, OPENING_AMG REAL,RECEIVE_AMT REAL,PAYMENT_AMT REAL, OUTSTANDING_AMT REAL, PHONE_NO INT , AGENT_CODE VARCHAR(25) REFERENCES agents(AGENT_CODE); 
+
+ERROR:  syntax error at or near ";"
+LINE 2: ...INT , AGENT_CODE VARCHAR(25) REFERENCES agents(AGENT_CODE); 
+                                                                     ^
+
+
+
+-- Executing query:
+
+create Table customer ( CUST_CODE VARCHAR (25) PRIMARY KEY,CUST_NAME TEXT ,CUST_CITY TEXT, WORKING_AREA TEXT , CUST_COUNTRY TEXT , GRADE  INT, OPENING_AMG REAL,RECEIVE_AMT REAL,PAYMENT_AMT REAL, OUTSTANDING_AMT REAL, PHONE_NO INT , AGENT_CODE VARCHAR(25) REFERENCES agents(AGENT_CODE); 
+
+ERROR:  syntax error at or near ";"
+LINE 2: ...INT , AGENT_CODE VARCHAR(25) REFERENCES agents(AGENT_CODE); 
+                                                                     ^
+
+
+-- Executing query:
+
+create Table customer ( CUST_CODE VARCHAR (25) PRIMARY KEY,CUST_NAME TEXT ,CUST_CITY TEXT, WORKING_AREA TEXT , CUST_COUNTRY TEXT , GRADE  INT, OPENING_AMG REAL,RECEIVE_AMT REAL,PAYMENT_AMT REAL, OUTSTANDING_AMT REAL, PHONE_NO INT , AGENT_CODE VARCHAR(25) REFERENCES agents; 
+
+ERROR:  syntax error at or near ";"
+LINE 2: ...L, PHONE_NO INT , AGENT_CODE VARCHAR(25) REFERENCES agents; 
+                                                                     ^
+
+
+
+-- Executing query:
+
+create Table customer ( CUST_CODE VARCHAR (25) PRIMARY KEY,CUST_NAME TEXT ,CUST_CITY TEXT, WORKING_AREA TEXT , CUST_COUNTRY TEXT , GRADE  INT, OPENING_AMG REAL,RECEIVE_AMT REAL,PAYMENT_AMT REAL, OUTSTANDING_AMT REAL, PHONE_NO INT , AGENT_CODE VARCHAR(25) REFERENCES agents; 
+
+
+
+
+-- Executing query:
+
+create Table customer ( CUST_CODE VARCHAR (25) PRIMARY KEY,CUST_NAME TEXT ,CUST_CITY TEXT, WORKING_AREA TEXT , CUST_COUNTRY TEXT , GRADE  INT, OPENING_AMG REAL,RECEIVE_AMT REAL,PAYMENT_AMT REAL, OUTSTANDING_AMT REAL, PHONE_NO INT , AGENT_CODE VARCHAR(25) REFERENCES agents
+
+
+
+-
+
+
+
+
+
+
+-- Executing query:
+
+create Table customer ( CUST_CODE VARCHAR (25) PRIMARY KEY,CUST_NAME TEXT ,CUST_CITY TEXT, WORKING_AREA TEXT , CUST_COUNTRY TEXT , GRADE  INT, OPENING_AMG REAL,RECEIVE_AMT REAL,PAYMENT_AMT REAL, OUTSTANDING_AMT REAL, PHONE_NO INT , AGENT_CODE VARCHAR(25) references agents(AGENT_CODE)); 
+
+Query returned successfully with no result in 133 ms.
+
+-- Executing query:
+
+create Table orders ( ORD_NUM VARCHAR (25) PRIMARY KEY,ORD_AMOUNT REAL ,ADVANCE_AMOUNT REAL ,ORD_DATE  DATE, WORKING_AREA TEXT , CUST_COUNTRY TEXT , GRADE  INT, OPENING_AMG REAL,RECEIVE_AMT REAL, AGENT_CODE VARCHAR(25) references agents(AGENT_CODE)); 
+
+Query returned successfully with no result in 105 ms.
+
+-- Executing query:
+DROP TABLE ORDERS;
+
+Query returned successfully with no result in 24 ms.
+
+-- Executing query:
+
+create Table orders ( ORD_NUM VARCHAR (25) PRIMARY KEY,ORD_AMOUNT REAL ,ADVANCE_AMOUNT REAL ,ORD_DATE  DATE, CUST_CODE VARCHAR (25) references customer(CUST_CODE), AGENT_CODE VARCHAR(25) references agents(AGENT_CODE)); 
+
+Query returned successfully with no result in 64 ms.
+
+-- Executing query:
+INSERT INTO agents VALUES ( 'A007','Ramasundar','Bangalore',0.15, 077-25814672, ''),('A003','Alex','London', 0.15,075-1245898969,'');
+Query returned successfully: 2 rows affected, 23 ms execution time.
+
+-- Executing query:
+INSERT INTO agents VALUES ( 'A008','Alford','New York',0.12, 044-25814672, ''),('A011','Ravi Kumar','Banglore', 0.12,077-1245898969,'');
+Query returned successfully: 2 rows affected, 22 ms execution time.
+
+-- Executing query:
+INSERT INTO C00013 VALUES ( 'C00013','holmes','London','London', 'UK','2',6000.00,5000.00,7000.00,4000.00,BBBBBBB,'A003'),('C00025','Ravindran','Banglore', 'Banglore','India',2,5000.00,7000.00,4000.00,8000.00,AVAVAVVA,'A011');
+
+ERROR:  relation "c00013" does not exist
+LINE 1: INSERT INTO C00013 VALUES ( 'C00013','holmes','London','Lond...
+                    ^
+
+
+
+-- Executing query:
+INSERT INTO customer VALUES ( 'C00013','holmes','London','London', 'UK','2',6000.00,5000.00,7000.00,4000.00,BBBBBBB,'A003'),('C00025','Ravindran','Banglore', 'Banglore','India',2,5000.00,7000.00,4000.00,8000.00,AVAVAVVA,'A011');
+
+
+                                                            
+
+
+
+-- Executing query:
+INSERT INTO customer VALUES ( 'C00013','holmes','London','London', 'UK','2',6000.00,5000.00,7000.00,4000.00,BBBBSBB,'A003'),('C00025','Ravindran','Banglore', 'Banglore','India',2,5000.00,7000.00,4000.00,8000.00,AVAVAVVA,'A011');
+
+
+ERROR: column "bbbbsbb" does not exist
+SQL state: 42703
+Character: 109
+
+-- Executing query:
+INSERT INTO customer VALUES ( 'C00013','holmes','London','London', 'UK','2',6000.00,5000.00,7000.00,4000.00,123456543,'A003'),('C00025','Ravindran','Banglore', 'Banglore','India',2,5000.00,7000.00,4000.00,8000.00,12345676543,'A011');
+
+ERROR:  integer out of range
+
+********** Error **********
+
+ERROR: integer out of range
+SQL state: 22003
+
+-- Executing query:
+INSERT INTO customer VALUES ( 'C00013','holmes','London','London', 'UK','2',6000.00,5000.00,7000.00,4000.00,1236543,'A003'),('C00025','Ravindran','Banglore', 'Banglore','India',2,5000.00,7000.00,4000.00,8000.00,1234567,'A011');
+
+Query returned successfully: 2 rows affected, 42 ms execution time.
+
+-- Executing query:
+INSERT INTO orders VALUES ( '200114',3500,2000,15-AUG-08, 'C00002','A008');
+
+ERROR:  column "aug" does not exist
+LINE 1: INSERT INTO orders VALUES ( '200114',3500,2000,15-AUG-08, 'C...
+                                                          ^
+
+
+
+
+
+-- Executing query:
+INSERT INTO orders VALUES ( '200114',3500,2000,2015-08-08, 'C00002','A008');
+
+ERROR:  column "ord_date" is of type date but expression is of type integer
+LINE 1: INSERT INTO orders VALUES ( '200114',3500,2000,2015-08-08, '...
+                                                       ^
+HINT:  You will need to rewrite or cast the expression.
+********** Error **********
+
+ERROR: column "ord_date" is of type date but expression is of type integer
+SQL state: 42804
+Hint: You will need to rewrite or cast the expression.
+Character: 48
+
+-- Executing query:
+INSERT INTO orders VALUES ( '200114',3500,2000,'2015-08-08', 'C00002','A008');
+
+ERROR:  insert or update on table "orders" violates foreign key constraint "orders_cust_code_fkey"
+DETAIL:  Key (cust_code)=(C00002) is not present in table "customer".
+********** Error **********
+
+ERROR: insert or update on table "orders" violates foreign key constraint "orders_cust_code_fkey"
+SQL state: 23503
+Detail: Key (cust_code)=(C00002) is not present in table "customer".
+
+-- Executing query:
+INSERT INTO orders VALUES ( '200114',3500,2000,'2015-08-08', 'C00015','A003');
+
+ERROR:  insert or update on table "orders" violates foreign key constraint "orders_cust_code_fkey"
+DETAIL:  Key (cust_code)=(C00015) is not present in table "customer".
+
+********** Error **********
+
+ERROR: insert or update on table "orders" violates foreign key constraint "orders_cust_code_fkey"
+SQL state: 23503
+Detail: Key (cust_code)=(C00015) is not present in table "customer".
+
+-- Executing query:
+INSERT INTO orders VALUES ( '200114',3500,2000,'2015-08-08', 'C00013','A003');
+
+Query returned successfully: one row affected, 21 ms execution time.
+
+-- Executing query:
+    SELECT a.ord_num,b.cust_name,a.cust_code,  
+    c.agent_code,b.cust_city  
+    FROM agents c,customer b,orders a  
+    WHERE b.cust_city=c.working_area  
+    AND a.cust_code=b.cust_code  
+    AND a.agent_code=c.agent_code;  
+
+Total query runtime: 21 ms.
+1 row retrieved.
+
+-- Executing query:
+   SELECT EMP_ID, NAME, DEPT FROM COMPANY INNER JOIN DEPARTMENT
+        ON COMPANY.ID = DEPARTMENT.EMP_ID
+   UNION
+     SELECT EMP_ID, NAME, DEPT FROM COMPANY LEFT OUTER JOIN DEPARTMENT
+        ON COMPANY.ID = DEPARTMENT.EMP_ID;
+Total query runtime: 12 ms.
+7 rows retrieved.
+
+-- Executing query:
+ SELECT EMP_ID, NAME, DEPT FROM COMPANY INNER JOIN DEPARTMENT
+        ON COMPANY.ID = DEPARTMENT.EMP_ID
+   UNION ALL
+     SELECT EMP_ID, NAME, DEPT FROM COMPANY LEFT OUTER JOIN DEPARTMENT
+        ON COMPANY.ID = DEPARTMENT.EMP_ID;
+Total query runtime: 12 ms.
+10 rows retrieved.
+
+-- Executing query:
+select c.id, c.name ,c.age,d.dept 
+ from Company as c, Department as d
+  where c.id=d.Emp_Id
+Total query runtime: 2 ms.
+2 rows retrieved.
+
+-- Executing query:
+SELECT C.ID AS COMPANY_ID, C.NAME AS COMPANY_NAME, C.AGE, D.DEPT
+        FROM COMPANY AS C, DEPARTMENT AS D
+        WHERE  C.ID = D.EMP_ID;
+Total query runtime: 12 ms.
+2 rows retrieved.
+
+-- Executing query:
+create table staff( id int , name  text );
+Query returned successfully with no result in 63 ms.
+
+-- Executing query:
+alter table staff add constraint pk primary key(id);
+
+Query returned successfully with no result in 63 ms.
+
+-- Executing query:
+alter table staff add constraint chk check(id>0);
+
+Query returned successfully with no result in 42 ms.
+
+
+-- Executing query:
+ALTER TABLE staff MODIFY COLUMN name varchar(50);
+ERROR:  syntax error at or near "MODIFY"
+LINE 1: ALTER TABLE staff MODIFY COLUMN name varchar(50);
+                          ^
+
+********** Error **********
+
+ERROR: syntax error at or near "MODIFY"
+SQL state: 42601
+Character: 19
+
+-- Executing query:
+ALTER TABLE staff MODIFY COLUMN Name varchar(50);
+ERROR:  syntax error at or near "MODIFY"
+LINE 1: ALTER TABLE staff MODIFY COLUMN Name varchar(50);
+                          ^
+
+********** Error **********
+
+ERROR: syntax error at or near "MODIFY"
+SQL state: 42601
+Character: 19
+
+-- Executing query:
+ALTER TABLE staff MODIFY COLUMN Id varchar(50);
+ERROR:  syntax error at or near "MODIFY"
+LINE 1: ALTER TABLE staff MODIFY COLUMN Id varchar(50);
+                          ^
+
+********** Error **********
+
+ERROR: syntax error at or near "MODIFY"
+SQL state: 42601
+Character: 19
+
+-- Executing query:
+ALTER TABLE staff MODIFY COLUMN Id varchar(50);
+ERROR:  syntax error at or near "MODIFY"
+LINE 1: ALTER TABLE staff MODIFY COLUMN Id varchar(50);
+                          ^
+********** Error **********
+
+ERROR: syntax error at or near "MODIFY"
+SQL state: 42601
+Character: 19
+
+-- Executing query:
+ALTER TABLE staff MODIFY COLUMN Id varchar(50);
+ERROR:  syntax error at or near "MODIFY"
+LINE 1: ALTER TABLE staff MODIFY COLUMN Id varchar(50);
+                          ^
+
+********** Error **********
+
+ERROR: syntax error at or near "MODIFY"
+SQL state: 42601
+Character: 19
+
+-- Executing query:
+ALTER TABLE staff MODIFY COLUMN Id varchar(50);
+ERROR:  syntax error at or near "MODIFY"
+LINE 1: ALTER TABLE staff MODIFY COLUMN Id varchar(50);
+                          ^
+
+********** Error **********
+
+ERROR: syntax error at or near "MODIFY"
+SQL state: 42601
+Character: 19
+
+-- Executing query:
+ALTER TABLE staff MODIFY COLUMN Id varchar(50);
+ERROR:  syntax error at or near "MODIFY"
+LINE 1: ALTER TABLE staff MODIFY COLUMN Id varchar(50);
+                          ^
+********** Error **********
+
+ERROR: syntax error at or near "MODIFY"
+SQL state: 42601
+Character: 19
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN Id varchar(50);
+ERROR:  syntax error at or near "varchar"
+LINE 1: ALTER TABLE staff alter COLUMN Id varchar(50);
+                                          ^
+
+********** Error **********
+
+ERROR: syntax error at or near "varchar"
+SQL state: 42601
+Character: 35
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN Id varchar(50);
+ERROR:  syntax error at or near "varchar"
+LINE 1: ALTER TABLE staff alter COLUMN Id varchar(50);
+                                          ^
+
+********** Error **********
+
+ERROR: syntax error at or near "varchar"
+SQL state: 42601
+Character: 35
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN Id varchar(50);
+ERROR:  syntax error at or near "varchar"
+LINE 1: ALTER TABLE staff alter COLUMN Id varchar(50);
+                                          ^
+
+********** Error **********
+
+ERROR: syntax error at or near "varchar"
+SQL state: 42601
+Character: 35
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN Id varchar(50);
+ERROR:  syntax error at or near "varchar"
+LINE 1: ALTER TABLE staff alter COLUMN Id varchar(50);
+                                          ^
+
+********** Error **********
+
+ERROR: syntax error at or near "varchar"
+SQL state: 42601
+Character: 35
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN Id varchar(50);
+ERROR:  syntax error at or near "varchar"
+LINE 1: ALTER TABLE staff alter COLUMN Id varchar(50);
+                                          ^
+
+********** Error **********
+
+ERROR: syntax error at or near "varchar"
+SQL state: 42601
+Character: 35
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN Id varchar(50);
+ERROR:  syntax error at or near "varchar"
+LINE 1: ALTER TABLE staff alter COLUMN Id varchar(50);
+                                          ^
+
+********** Error **********
+
+ERROR: syntax error at or near "varchar"
+SQL state: 42601
+Character: 35
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN Name varchar(50) using staff :: varchar(50);
+ERROR:  syntax error at or near "varchar"
+LINE 1: ALTER TABLE staff alter COLUMN Name varchar(50) using staff ...
+                                            ^
+
+********** Error **********
+
+ERROR: syntax error at or near "varchar"
+SQL state: 42601
+Character: 37
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN Name varchar(50) using staff :: varchar(50);
+ERROR:  syntax error at or near "varchar"
+LINE 1: ALTER TABLE staff alter COLUMN Name varchar(50) using staff ...
+                                            ^
+
+********** Error **********
+
+ERROR: syntax error at or near "varchar"
+SQL state: 42601
+Character: 37
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN Name varchar(50) using staff :: varchar(50);
+ERROR:  syntax error at or near "varchar"
+LINE 1: ALTER TABLE staff alter COLUMN Name varchar(50) using staff ...
+                                            ^
+
+********** Error **********
+
+ERROR: syntax error at or near "varchar"
+SQL state: 42601
+Character: 37
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN Name varchar(50) using staff :: varchar(50);
+ERROR:  syntax error at or near "varchar"
+LINE 1: ALTER TABLE staff alter COLUMN Name varchar(50) using staff ...
+                                            ^
+
+********** Error **********
+
+ERROR: syntax error at or near "varchar"
+SQL state: 42601
+Character: 37
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN Name varchar(50) using staff :: varchar(50);
+ERROR:  syntax error at or near "varchar"
+LINE 1: ALTER TABLE staff alter COLUMN Name varchar(50) using staff ...
+                                            ^
+
+********** Error **********
+
+ERROR: syntax error at or near "varchar"
+SQL state: 42601
+Character: 37
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN Name varchar(50) using staff :: varchar(50);
+ERROR:  syntax error at or near "varchar"
+LINE 1: ALTER TABLE staff alter COLUMN Name varchar(50) using staff ...
+                                            ^
+
+********** Error **********
+
+ERROR: syntax error at or near "varchar"
+SQL state: 42601
+Character: 37
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN Name varchar2(50) using staff :: varchar2(50);
+ERROR:  syntax error at or near "varchar2"
+LINE 1: ALTER TABLE staff alter COLUMN Name varchar2(50) using staff...
+                                            ^
+
+********** Error **********
+
+ERROR: syntax error at or near "varchar2"
+SQL state: 42601
+Character: 37
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN Name int using staff :: int;
+ERROR:  syntax error at or near "int"
+LINE 1: ALTER TABLE staff alter COLUMN Name int using staff :: int;
+                                            ^
+
+********** Error **********
+
+ERROR: syntax error at or near "int"
+SQL state: 42601
+Character: 37
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN Name int(20) using staff :: int(20);
+ERROR:  syntax error at or near "int"
+LINE 1: ALTER TABLE staff alter COLUMN Name int(20) using staff :: i...
+                                            ^
+
+********** Error **********
+
+ERROR: syntax error at or near "int"
+SQL state: 42601
+Character: 37
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN Name int(20) using staff :: int(20);
+ERROR:  syntax error at or near "int"
+LINE 1: ALTER TABLE staff alter COLUMN Name int(20) using staff :: i...
+                                            ^
+
+********** Error **********
+
+ERROR: syntax error at or near "int"
+SQL state: 42601
+Character: 37
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN Name int(20) using staff :: int(20);
+ERROR:  syntax error at or near "int"
+LINE 1: ALTER TABLE staff alter COLUMN Name int(20) using staff :: i...
+                                            ^
+********** Error **********
+
+ERROR: syntax error at or near "int"
+SQL state: 42601
+Character: 37
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN Name int(20) using staff :: int(20);
+ERROR:  syntax error at or near "int"
+LINE 1: ALTER TABLE staff alter COLUMN Name int(20) using staff :: i...
+                                            ^
+
+********** Error **********
+
+ERROR: syntax error at or near "int"
+SQL state: 42601
+Character: 37
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN  (20) using staff :: int(20);
+ERROR:  syntax error at or near "("
+LINE 1: ALTER TABLE staff alter COLUMN  (20) using staff :: int(20);
+                                        ^
+
+********** Error **********
+
+ERROR: syntax error at or near "("
+SQL state: 42601
+Character: 33
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN  (20) using staff :: int(20);
+ERROR:  syntax error at or near "("
+LINE 1: ALTER TABLE staff alter COLUMN  (20) using staff :: int(20);
+                                        ^
+
+********** Error **********
+
+ERROR: syntax error at or near "("
+SQL state: 42601
+Character: 33
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN id  varchar(20) using staff ::varchar(20);
+ERROR:  syntax error at or near "varchar"
+LINE 1: ALTER TABLE staff alter COLUMN id  varchar(20) using staff :...
+                                           ^
+
+********** Error **********
+
+ERROR: syntax error at or near "varchar"
+SQL state: 42601
+Character: 36
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN id  varchar(20) using staff ::varchar(20);
+ERROR:  syntax error at or near "varchar"
+LINE 1: ALTER TABLE staff alter COLUMN id  varchar(20) using staff :...
+                                           ^
+
+********** Error **********
+
+ERROR: syntax error at or near "varchar"
+SQL state: 42601
+Character: 36
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN id  varchar(20) using staff ::varchar(20);
+ERROR:  syntax error at or near "varchar"
+LINE 1: ALTER TABLE staff alter COLUMN id  varchar(20) using staff :...
+                                           ^
+
+********** Error **********
+
+ERROR: syntax error at or near "varchar"
+SQL state: 42601
+Character: 36
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN id  varchar(20) using staff ::varchar(20);
+ERROR:  syntax error at or near "varchar"
+LINE 1: ALTER TABLE staff alter COLUMN id  varchar(20) using staff :...
+                                           ^
+
+********** Error **********
+
+ERROR: syntax error at or near "varchar"
+SQL state: 42601
+Character: 36
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN id  varchar(20) using staff ::varchar(20);
+ERROR:  syntax error at or near "varchar"
+LINE 1: ALTER TABLE staff alter COLUMN id  varchar(20) using staff :...
+                                           ^
+
+********** Error **********
+
+ERROR: syntax error at or near "varchar"
+SQL state: 42601
+Character: 36
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN id  varchar(20) using staff ::varchar(20);
+ERROR:  syntax error at or near "varchar"
+LINE 1: ALTER TABLE staff alter COLUMN id  varchar(20) using staff :...
+                                           ^
+
+********** Error **********
+
+ERROR: syntax error at or near "varchar"
+SQL state: 42601
+Character: 36
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN id  varchar(20) using staff ::varchar(20);
+ERROR:  syntax error at or near "varchar"
+LINE 1: ALTER TABLE staff alter COLUMN id  varchar(20) using staff :...
+                                           ^
+
+********** Error **********
+
+ERROR: syntax error at or near "varchar"
+SQL state: 42601
+Character: 36
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN id  varchar(20) using staff ::varchar(20);
+ERROR:  syntax error at or near "varchar"
+LINE 1: ALTER TABLE staff alter COLUMN id  varchar(20) using staff :...
+                                           ^
+
+********** Error **********
+
+ERROR: syntax error at or near "varchar"
+SQL state: 42601
+Character: 36
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN id  varchar(20) using staff ::varchar(20);
+ERROR:  syntax error at or near "varchar"
+LINE 1: ALTER TABLE staff alter COLUMN id  varchar(20) using staff :...
+                                           ^
+
+********** Error **********
+
+ERROR: syntax error at or near "varchar"
+SQL state: 42601
+Character: 36
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN id  varchar(20) using staff ::varchar(20);
+ERROR:  syntax error at or near "varchar"
+LINE 1: ALTER TABLE staff alter COLUMN id  varchar(20) using staff :...
+                                           ^
+
+********** Error **********
+
+ERROR: syntax error at or near "varchar"
+SQL state: 42601
+Character: 36
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN id  varchar(20) using staff ::varchar(20);
+ERROR:  syntax error at or near "varchar"
+LINE 1: ALTER TABLE staff alter COLUMN id  varchar(20) using staff :...
+                                           ^
+
+********** Error **********
+
+ERROR: syntax error at or near "varchar"
+SQL state: 42601
+Character: 36
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN id  varchar(20) using staff ::varchar(20);
+ERROR:  syntax error at or near "varchar"
+LINE 1: ALTER TABLE staff alter COLUMN id  varchar(20) using staff :...
+                                           ^
+
+********** Error **********
+
+ERROR: syntax error at or near "varchar"
+SQL state: 42601
+Character: 36
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN id  varchar(20) using staff ::varchar(20);
+ERROR:  syntax error at or near "varchar"
+LINE 1: ALTER TABLE staff alter COLUMN id  varchar(20) using staff :...
+                                           ^
+
+********** Error **********
+
+ERROR: syntax error at or near "varchar"
+SQL state: 42601
+Character: 36
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN id  varchar(20) using staff ::varchar(20);
+ERROR:  syntax error at or near "varchar"
+LINE 1: ALTER TABLE staff alter COLUMN id  varchar(20) using staff :...
+                                           ^
+
+********** Error **********
+
+ERROR: syntax error at or near "varchar"
+SQL state: 42601
+Character: 36
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN id  varchar(20) using staff ::varchar(20);
+ERROR:  syntax error at or near "varchar"
+LINE 1: ALTER TABLE staff alter COLUMN id  varchar(20) using staff :...
+                                           ^
+
+********** Error **********
+
+ERROR: syntax error at or near "varchar"
+SQL state: 42601
+Character: 36
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN id  varchar(20) using staff ::varchar(20);
+ERROR:  syntax error at or near "varchar"
+LINE 1: ALTER TABLE staff alter COLUMN id  varchar(20) using staff :...
+                                           ^
+
+********** Error **********
+
+ERROR: syntax error at or near "varchar"
+SQL state: 42601
+Character: 36
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN id  varchar(20) using staff ::varchar(20);
+ERROR:  syntax error at or near "varchar"
+LINE 1: ALTER TABLE staff alter COLUMN id  varchar(20) using staff :...
+                                           ^
+
+********** Error **********
+
+ERROR: syntax error at or near "varchar"
+SQL state: 42601
+Character: 36
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN id  varchar(20) using staff ::varchar(20);
+ERROR:  syntax error at or near "varchar"
+LINE 1: ALTER TABLE staff alter COLUMN id  varchar(20) using staff :...
+                                           ^
+
+********** Error **********
+
+ERROR: syntax error at or near "varchar"
+SQL state: 42601
+Character: 36
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN id  type varchar(20) using staff ::varchar(20);
+
+
+ERROR:  operator does not exist: character varying > integer
+HINT:  No operator matches the given name and argument type(s). You might need to add explicit type casts.
+
+********** Error **********
+
+ERROR: operator does not exist: character varying > integer
+SQL state: 42883
+Hint: No operator matches the given name and argument type(s). You might need to add explicit type casts.
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN id  type varchar(20) using staff ::varchar(20);
+
+
+ERROR:  operator does not exist: character varying > integer
+HINT:  No operator matches the given name and argument type(s). You might need to add explicit type casts.
+********** Error **********
+
+ERROR: operator does not exist: character varying > integer
+SQL state: 42883
+Hint: No operator matches the given name and argument type(s). You might need to add explicit type casts.
+
+-- Executing query:
+ALTER TABLE staff alter COLUMN id  type text using staff ::text;
+
+
+ERROR:  operator does not exist: text > integer
+HINT:  No operator matches the given name and argument type(s). You might need to add explicit type casts.
+
+********** Error **********
+
+ERROR: operator does not exist: text > integer
+SQL state: 42883
+Hint: No operator matches the given name and argument type(s). You might need to add explicit type casts.
+
+
