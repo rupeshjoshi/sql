@@ -1,0 +1,93 @@
+create database Test;
+
+CREATE TABLE Department(
+   Id Int PRIMARY KEY      NOT NULL,
+   Dept           CHAR(50) NOT NULL,
+   Emp_Id         INT      NOT NULL
+);
+
+
+INSERT INTO Company VALUES (1, 'Paul', 32, 'California', 20000.00 );
+
+INSERT INTO Company  VALUES (2, 'Allen', 25, 'Texas', '2007-12-13');
+
+insert into Company Values (3, 'Teddy', 23, 'Norway', 20000.00 );
+
+insert into Company Values (4, 'Mark', 25, 'Rich-Mond ', 65000.00 ), (5, 'David', 27, 'Texas', 85000.00 );
+
+SELECT * FROM Company;
+
+SELECT Id, Name from  Company;
+
+ Select * from company where age >=25 or salary >=15000;
+
+SELECT * FROM COMPANY
+        WHERE AGE >(SELECT AGE FROM COMPANY WHERE SALARY > 65000);
+
+SELECT * FROM Company WHERE Age  between  25 And 32 ;
+
+SELECT * FROM Company WHERE Age in (25,32) ;
+
+SELECT * FROM COMPANY WHERE Name  like  'P%'
+
+SELECT * FROM COMPANY WHERE AGE IS NOT NULL;
+SELECT * from Company where Age >25 And Salary >50000
+
+SELECT CURRENT_TIMESTAMP;
+
+
+---------------------UPDATE-------------------------------------
+ 
+update Company set salary =45000 where id='3';
+
+update Company set Address ='Texas' where salary=20000;
+
+
+
+--------------------delete--------------------------------------
+
+Delete From Company where id='5';
+
+
+
+
+
+Select * from Company where Name like '%a%' order by Id;
+
+Select * from Company where Age::text like '2%' order by Id;
+
+Select * from Company where Age::text Like '2%' limit 5 offset
+ 1;
+
+Select * from Company order by Name desc;
+
+
+SELECT Name ,sum(Salary) FROM COMPANY group by Name;
+INSERT INTO COMPANY VALUES (8, 'Paul', 24, 'Houston', 20000.00);
+INSERT INTO COMPANY VALUES (9, 'James', 44, 'Norway', 5000.00);
+INSERT INTO COMPANY VALUES (10, 'James', 45, 'Texas', 5000.00);
+
+SELECT NAME, SUM(SALARY) FROM COMPANY GROUP BY NAME ORDER BY NAME;
+
+ELECT NAME, SUM(SALARY)
+         FROM COMPANY GROUP BY NAME ORDER BY NAME DESC;
+         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
